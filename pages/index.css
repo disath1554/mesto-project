@@ -1,0 +1,20 @@
+@import url(../vender/normalize.css);
+@import url(../pages/fonts.css);
+/*_*/
+@import url(../blocks/page/page.css);
+@import url(../blocks/content/content.css);
+/*_*/
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+/*_*/
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__image/profile__image.css);
+@import url(../blocks/profile/__content/profile__content.css);
+@import url(../blocks/profile/__title/profile__title.css);
+@import url(../blocks/profile/__subtitle/profile__subtitle.css);
+@import url(../blocks/profile/__edit/profile__edit.css);
+/*_*/
+@import url(../blocks/places/places.css);
+@import url(../blocks/places/__place-card/places__place-card.css);
+@import url(../blocks/places/__place-image/places__place-image.css);

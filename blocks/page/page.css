@@ -1,0 +1,17 @@
+.page {
+    background: #2a2c2f;
+    color: #fff;
+    font-family: Inter, Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    display: grid;
+    column-gap: 0;
+    row-gap: 0;
+    grid-template-columns: auto min(90vw, 880px) auto;
+    grid-template-rows: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
