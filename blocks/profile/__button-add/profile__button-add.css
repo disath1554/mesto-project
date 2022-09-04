@@ -5,4 +5,18 @@
     min-width: 150px;
     height: 50px;
     border: 2px solid white;
+    background-image: url(../../../images/button-add.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.profile__button-add:hover {
+    opacity: .8;
+}
+
+@media screen and (max-width: 700px) {
+    .profile__button-add {
+        align-self: stretch;
+    }
 }

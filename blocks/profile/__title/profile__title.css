@@ -5,3 +5,10 @@
     margin: 0 0 1rem 0;
     text-align: left;
 }
+
+@media screen and (max-width: 700px) {
+    .profile__title {
+        font-size: min(2.625rem, 8.43vw);
+        text-align: center;
+    }
+}

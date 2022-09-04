@@ -8,3 +8,14 @@
     background-position: center;
     cursor: pointer;
 }
+
+.profile__button-edit:hover {
+    opacity: .8;
+}
+
+@media screen and (max-width: 700px) {
+    .profile__button-edit {
+        width: min(5.625vw, 24px);
+        height: min(5.625vw, 24px);
+    }
+}
