@@ -7,3 +7,10 @@
     padding: auto;
     padding-top: 145px;
 }
+
+@media screen and (max-width: 475px) {
+    .form__toggle {
+        width: 282px;
+        height: 352px;
+    }
+}
