@@ -1,0 +1,6 @@
+.form__item {
+    width: 90%;
+    align-self: flex-start;
+    margin: .75rem auto;
+    border: 0;
+}

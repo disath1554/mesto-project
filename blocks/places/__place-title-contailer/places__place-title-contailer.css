@@ -1,0 +1,9 @@
+.places__place-title-contailer {
+    width: 90%;
+    display: flex;
+    justify-content: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1.3rem auto 2rem auto;
+}

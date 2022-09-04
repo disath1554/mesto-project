@@ -1,0 +1,9 @@
+.form__toggle {
+    width: 510px;
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: auto;
+    padding-top: 145px;
+}
