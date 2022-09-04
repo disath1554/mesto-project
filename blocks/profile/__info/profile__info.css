@@ -4,6 +4,10 @@
     flex-direction: column;
     justify-content: center;
     align-self: center;
-    margin: 1.4rem auto;
 }
 
+@media screen and (max-width: 700px) {
+    .profile__info {
+        margin: 1.4rem auto;
+    }
+}

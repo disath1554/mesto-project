@@ -10,5 +10,10 @@
     .profile__name {
         font-size: min(2.625rem, 8.43vw);
         text-align: center;
+        padding-left: 36px;
+        margin-bottom: 14px;
+    }
+    .profile__name::before {
+        content: " "
     }
 }

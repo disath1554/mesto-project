@@ -9,3 +9,9 @@
     grid-template-rows: auto;
     padding-top: 3rem;
 }
+
+@media screen and (max-width: 700px) {
+    .places {
+        padding-top: 2.25rem;
+    }
+}

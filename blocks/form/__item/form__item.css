@@ -1,13 +1,13 @@
 .form__item {
     width: 90%;
     align-self: flex-start;
-    margin: .75rem auto;
+    margin: .5rem auto 0 auto;
     border: 0;
 }
 
 @media screen and (max-width: 475px) {
     .form__item {
         width: 90%;
-        margin: .75rem auto;
+        margin: .5rem auto 0 auto;
     }
 }

@@ -14,5 +14,6 @@
     .profile {
         flex-direction: column;
         align-items: center;
+        padding-top: 38.25px;
     }
 }
