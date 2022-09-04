@@ -1,7 +1,7 @@
 .places__place-title-contailer {
     width: 90%;
     display: flex;
-    justify-content: row;
+    flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
