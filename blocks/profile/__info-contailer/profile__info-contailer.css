@@ -1,14 +1,13 @@
-.profile__avatar {
+.profile__info-contailer {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
-    align-items: center;
+    align-items: baseline;
 }
 
 @media screen and (max-width: 700px) {
-    .profile__avatar {
-        width: 100%;
-        flex-direction: column;
+    .profile__info-contailer {
+        justify-content: center;
     }
 }

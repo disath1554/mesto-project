@@ -1,12 +1,13 @@
 .profile__subtitle {
     font-size: 1.125rem;
     line-height: 1.2;
-    margin: 0;
+    margin: 16px 0 0 0;
 }
 
 @media screen and (max-width: 700px) {
     .profile__subtitle {
         font-size: min(1.125rem, 4.375vw);
+        margin: 14px;
         text-align: center;
     }
 }

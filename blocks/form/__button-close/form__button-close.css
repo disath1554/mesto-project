@@ -8,17 +8,19 @@
     background-repeat: no-repeat;
     background-position: center;
     background-color: transparent;
+    border: none;
     cursor: pointer;
 }
 
 .form__button-close:hover {
-    opacity: .8;
+    opacity: .6;
 }
 
 @media screen and (max-width: 475px) {
     .form__button-close {
         width: 20px;
         height: 20px;
+        margin: 0 0 16px 16px;
         background-image: url(../../../images/button-close-small.svg); 
     }
 }
