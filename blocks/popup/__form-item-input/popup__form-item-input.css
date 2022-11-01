@@ -1,4 +1,4 @@
-.form__item-input {
+.popup__form-item-input {
     width: 100%;
     font-size: 0.875rem;
     line-height: 1.2;
@@ -13,6 +13,6 @@
     overflow: hidden;
 }
 
-.form__item-input:last-child {
+.popup__form-item-input:last-child {
     margin-bottom: 0px;
 }

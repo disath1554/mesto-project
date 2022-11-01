@@ -1,5 +1,32 @@
 .places__place-image {
     width: 100%;
-    object-fit: cover;
+    padding-bottom: 100%;
     border-radius: 10px 10px 0 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.places__place-image#img_place_1 {
+    background-image: url(../../../images/places/karathaevo.jpg);
+}
+
+.places__place-image#img_place_2 {
+    background-image: url(../../../images/places/baikal.jpg);
+}
+
+.places__place-image#img_place_3 {
+    background-image: url(../../../images/places/dombai.jpg);
+}
+
+.places__place-image#img_place_4 {
+    background-image: url(../../../images/places/kolsky.jpg);
+}
+
+.places__place-image#img_place_5 {
+    background-image: url(../../../images/places/winter-baikal.jpg);
+}
+
+.places__place-image#img_place_6 {
+    background-image: url(../../../images/places/kosa.jpg);
 }

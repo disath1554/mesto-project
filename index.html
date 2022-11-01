@@ -28,63 +28,62 @@
     </section>
     <section class="places">
         <div class="places__place-card">
-            <img class="places__place-image" src="./images/places/karathaevo.jpg" alt="Карачаевск-Черкесский">
+            <div class="places__place-image" id="img_place_1"></div>
             <div class="places__place-title-contailer">
                 <h2 class="places__place-title-text">Карачаевск-Черкесский</h2>
                 <button type="button" class="places__place-like"></button>
             </div>
         </div>
         <div class="places__place-card">
-            <img class="places__place-image" src="./images/places/elbrus.jpg" alt="гора Эльбрус">
+            <div class="places__place-image" id="img_place_2"></div>
             <div class="places__place-title-contailer">
-                <h2 class="places__place-title-text">Гора Эльбрус</h2>
+                <h2 class="places__place-title-text">Осенний Байкал</h2>
                 <button type="button" class="places__place-like"></button>
             </div> 
         </div>
         <div class="places__place-card">
-            <img class="places__place-image" src="./images/places/dombai.jpg" alt="Домбай">
+            <div class="places__place-image" id="img_place_3"></div>
             <div class="places__place-title-contailer">
                 <h2 class="places__place-title-text">Домбай</h2>
                 <button type="button" class="places__place-like"></button>
             </div>
         </div>
         <div class="places__place-card">
-            <img class="places__place-image" src="./images/places/kolsky.jpg" alt="Кольский">
+            <div class="places__place-image" id="img_place_4"></div>
             <div class="places__place-title-contailer">
                 <h2 class="places__place-title-text">Кольский</h2>
                 <button type="button" class="places__place-like"></button>
             </div>  
         </div>
         <div class="places__place-card">
-            <img class="places__place-image" src="./images/places/winter-baikal.jpg" alt="Байкал">
+            <div class="places__place-image" id="img_place_5"></div>
             <div class="places__place-title-contailer">
                 <h2 class="places__place-title-text">Байкал</h2>
                 <button type="button" class="places__place-like"></button>
             </div>
         </div>
         <div class="places__place-card">
-            <img class="places__place-image" src="./images/places/kosa.jpg" alt="Куршская коса">
+            <div class="places__place-image" id="img_place_6"></div>
             <div class="places__place-title-contailer">
                 <h2 class="places__place-title-text">Куршская коса</h2>
                 <button type="button" class="places__place-like"></button>
             </div>
         </div>
-    
     </section>
 </main>
 <footer class="footer">
     <p class="footer__content">© 2020 Mesto Russia</p>
 </footer>
-<div class="form">
-    <div class="form__toggle">
-        <button type="button" class="form__button-close"></button>
-        <form class="form__edit" name="profiledit" method="post">
-            <h2 class="form__item form__heading">Редактировать профиль</h2>
-            <fieldset class="form__item">
-                <input type="text" class="form__item-input" placeholder="Имя" name="username" id="user_name">
-                <input type="text" class="form__item-input" placeholder="О себе" name="aboutself" id="about_self">
+<div class="popup popup_opened">
+    <div class="popup__contailer">
+        <button type="button" class="popup__button-close"></button>
+        <form class="popup__form-edit" name="profiledit" method="post">
+            <h2 class="popup__form-item popup__form-heading">Редактировать профиль</h2>
+            <fieldset class="popup__form-item">
+                <input type="text" class="popup__form-item-input" placeholder="Имя" name="username" id="user_name">
+                <input type="text" class="popup__form-item-input" placeholder="О себе" name="aboutself" id="about_self">
             </fieldset> 
-            <button type="submit" class="form__item form__button-save" value="Сохранить">Сохранить</button>
+            <button type="submit" class="popup__form-item popup__form-button-save" value="Сохранить">Сохранить</button>
         </form>               
     </div> 
 </div>
