@@ -9,9 +9,10 @@
 /*_*/
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__image-container/profile__image-container.css);
 @import url(../blocks/profile/__image/profile__image.css);
 @import url(../blocks/profile/__info/profile__info.css);
-@import url(../blocks/profile/__info-contailer/profile__info-contailer.css);
+@import url(../blocks/profile/__info-container/profile__info-container.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__subtitle/profile__subtitle.css);
 @import url(../blocks/profile/__button-edit/profile__button-edit.css);
@@ -20,7 +21,7 @@
 @import url(../blocks/places/places.css);
 @import url(../blocks/places/__place-card/places__place-card.css);
 @import url(../blocks/places/__place-image/places__place-image.css);
-@import url(../blocks/places/__place-title-contailer/places__place-title-contailer.css);
+@import url(../blocks/places/__place-title-container/places__place-title-container.css);
 @import url(../blocks/places/__place-title-text/places__place-title-text.css);
 @import url(../blocks/places/__place-like/places__place-like.css);
 /*_*/

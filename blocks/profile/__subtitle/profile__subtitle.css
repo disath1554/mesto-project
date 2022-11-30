@@ -2,12 +2,19 @@
     font-size: 1.125rem;
     line-height: 1.2;
     margin: 16px 0 0 0;
+    text-overflow: ellipsis;
+    max-width: 316px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 720px) {
     .profile__subtitle {
         font-size: min(1.125rem, 4.375vw);
         margin: 14px;
+        margin-bottom: 0;
+        max-width: 100%;
         text-align: center;
     }
 }
+

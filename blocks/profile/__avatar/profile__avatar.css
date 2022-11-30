@@ -1,12 +1,12 @@
 .profile__avatar {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     flex-wrap: nowrap;
-    justify-content: flex-start;
     align-items: center;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 720px) {
     .profile__avatar {
         width: 100%;
         flex-direction: column;

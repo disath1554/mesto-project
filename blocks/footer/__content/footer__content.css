@@ -5,3 +5,9 @@
     color: #545454;
     margin: 0;
 }
+
+@media screen and (max-width: 320px) {
+    .footer__content {
+        font-size: 0.875rem;
+    }
+}

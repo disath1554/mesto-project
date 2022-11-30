@@ -3,5 +3,13 @@
     grid-column: 2;
     width: 100%;
     justify-self: start;
-    border-bottom: 1px solid rgba(84, 84, 84, .7);;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
+}
+
+@media screen and (max-width: 320px) {
+    .header {
+        grid-column-start: 1;
+        grid-column-end: -1;
+    }
 }

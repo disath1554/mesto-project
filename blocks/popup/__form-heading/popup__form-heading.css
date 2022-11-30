@@ -5,6 +5,7 @@
     line-height: 1.2;
     align-self: start;
     text-align: left;
+    padding: 0;
     margin: 0;
     margin-bottom: 20px;
     border: 0;
@@ -12,7 +13,7 @@
 
 @media screen and (max-width: 475px) {
     .popup__form-heading {
-        font-size: 1.2rem;
+        font-size: 1.125rem;
         margin: 25px 0 32px 22px;
     }
 }
