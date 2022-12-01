@@ -3,8 +3,8 @@
     grid-column-end: -1;
     width: 100vw;
     height: 100vh;
-    padding-top: max(15%, 77px);
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, .5);
     position: fixed;
