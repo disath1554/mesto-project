@@ -1,33 +1,11 @@
 .popup__form-item {
-    width: 83.25%;
-    align-self: flex-start;
-    margin: 0 auto;
-    padding: 0;
+    width: 330px;
     border: 0;
-}
-
-.popup__form-item:first-child {
-    margin-top: 34px;
-    margin-bottom: 54px;
-}
-
-.popup__form-item:last-child {
-    margin-top: 47px;
-    margin-bottom: 37px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @media screen and (max-width: 575px) {
     .popup__form-item {
-        width: 90%;
+        width: 238px;
     }
-
-    .popup__form-item:first-child {
-        margin-top: 25px;
-        margin-bottom: 75px;
-    }
-    
-    .popup__form-item:last-child {
-        margin-top: 45px;
-        margin-bottom: 25px;
-    }
-}
