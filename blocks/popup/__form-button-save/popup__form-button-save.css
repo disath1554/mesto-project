@@ -18,7 +18,7 @@
 @media screen and (max-width: 575px) {
     .popup__form-button-save {
         font-size: .875rem;
-        margin: 45px auto 25px auto;
+        margin: 45px 22px 25px 22px;
     }
 }
 
