@@ -29,48 +29,7 @@
         <button type="button" class="profile__button-add"></button>
     </section>
     <section class="places">
-        <div class="places__place-card">
-            <div class="places__place-image" style="background-image: url(./images/places/karathaevo.jpg);"></div>
-            <div class="places__place-title-container">
-                <h2 class="places__place-title-text">Карачаевск-Черкесский</h2>
-                <button type="button" class="places__place-like"></button>
-            </div>
-        </div>
-        <div class="places__place-card">
-            <div class="places__place-image" style="background-image: url(./images/places/baikal.jpg);"></div>
-            <div class="places__place-title-container">
-                <h2 class="places__place-title-text">Осенний Байкал</h2>
-                <button type="button" class="places__place-like"></button>
-            </div> 
-        </div>
-        <div class="places__place-card">
-            <div class="places__place-image" style="background-image: url(./images/places/dombai.jpg);"></div>
-            <div class="places__place-title-container">
-                <h2 class="places__place-title-text">Домбай</h2>
-                <button type="button" class="places__place-like"></button>
-            </div>
-        </div>
-        <div class="places__place-card">
-            <div class="places__place-image" style="background-image: url(./images/places/kolsky.jpg);"></div>
-            <div class="places__place-title-container">
-                <h2 class="places__place-title-text">Кольский</h2>
-                <button type="button" class="places__place-like"></button>
-            </div>  
-        </div>
-        <div class="places__place-card">
-            <div class="places__place-image" style="background-image: url(./images/places/winter-baikal.jpg);"></div>
-            <div class="places__place-title-container">
-                <h2 class="places__place-title-text">Байкал</h2>
-                <button type="button" class="places__place-like"></button>
-            </div>
-        </div>
-        <div class="places__place-card">
-            <div class="places__place-image" style="background-image: url(./images/places/kosa.jpg);"></div>
-            <div class="places__place-title-container">
-                <h2 class="places__place-title-text">Куршская коса</h2>
-                <button type="button" class="places__place-like"></button>
-            </div>
-        </div>
+        
     </section>
 </main>
 <footer class="footer">
@@ -98,10 +57,31 @@
                 <input type="text" class="popup__form-item-input" placeholder="Название" name="titlecard" id="title_card">
                 <input type="text" class="popup__form-item-input" placeholder="Ссылка на картинку" name="refcard" id="ref_card">
             </fieldset>
-        <button type="submit" class="popup__form-item popup__form-button-save" value="Создать">Создать</button>
+        <button type="submit" class="popup__form-item popup__form-button-save" value="Создать">Сохранить</button>
         </form>
     </div>               
 </div>
+<div class="popup popup_closed" id="popup_view_image">
+    <div class="popup__container">
+        <button type="button" class="popup__button-close"></button>
+        <div class="popup__view">
+            <img src="./images/places/karelia.jpg" class="popup__view-image" alt="Карелия">
+            <p class="popup__view-image-title">Карелия</p>
+        </div>
+    </div>               
+</div>
+<template id="card-template">
+    <div class="places__place-card">
+        <div class="places__place-image-container">
+            <button type="button" class="places__place-delete"></button>
+            <div class="places__place-image"></div>
+        </div>
+        <div class="places__place-title-container">
+            <h2 class="places__place-title-text"></h2>
+            <button type="button" class="places__place-like"></button>
+        </div>
+    </div>
+</template>
 <script src="./script/script.js"></script>
 </body>
 </html>

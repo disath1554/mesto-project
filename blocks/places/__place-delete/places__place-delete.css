@@ -1,0 +1,22 @@
+.places__place-delete {
+    width: 18px;
+    height: 23px;
+    border: 0;
+    display: flex;
+    align-self: flex-end;
+    background-image: url(../../../images/button-delete-card.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    opacity: 1;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+
+.places__place-delete:hover {
+    opacity: .6;
+}
+
