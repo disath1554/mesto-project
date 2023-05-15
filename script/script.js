@@ -173,7 +173,7 @@ closeCardAddButton.addEventListener('click', closeAddCard);
 addCardButton.addEventListener('click', AddCard);
 addForm.addEventListener('submit', handleFormAddSubmit);
 //
-function viewImage() {
+function viewPopupImage() {
     let popupImage = viewImagePopup.querySelectorAll('.popup__view-image');
     let popupImageTitle = viewImagePopup.querySelectorAll('.popup__view-image-title');
 
@@ -181,7 +181,7 @@ function viewImage() {
     viewImagePopup.classList.add('popup_opened');
 }
 //
-function viewImage() {
+function closePopupImage() {
     addCardPopup.classList.remove('popup_opened');
     addCardPopup.classList.add('popup_closed');
 }
