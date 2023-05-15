@@ -1,0 +1,6 @@
+.popup__container_image {
+    width: min(min(90vw, 60vh), 816px);
+    height: min(min(60vh, 90vw), 540px);
+    background: none;
+    border: 1px solid red;
+}
