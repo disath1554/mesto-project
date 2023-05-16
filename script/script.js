@@ -84,12 +84,28 @@ function likeCard(evt) {
 //
 // delete card
 function deleteCard(evt) {
-    evt.target.classList.toggle('places__place-like_active');
     let removeEvent = evt.target.parentElement.parentElement;
     let titleName = removeEvent.querySelector('.places__place-title-text').textContent;
     console.log(removeEvent.id)
     removeEvent.remove()
 }
+// 
+function viewImage(evt) {
+    let elem = evt.target.parentElement.parentElement;
+    let imgLink = elem.querySelector('.places__place-image').style.backgroundImage;
+    let imgTitle = elem.querySelector('.places__place-title-text').textContent;
+    
+    let imgElement =  viewImagePopup.querySelector('.popup__view-image');    
+    imgElement.src = `${imgLink.slice(5, -2)}`;
+    imgElement.alt = imgTitle;
+    let titleElement =  viewImagePopup.querySelector('.popup__view-image-title');
+    titleElement.textContent = imgTitle;
+    
+    console.log(imgElement);
+
+    viewImagePopup.classList.remove('popup_closed');
+    viewImagePopup.classList.add('popup_opened');
+ }
 //
 //add cards into html
 function loadCard(imageUrl, titleValue, idElement, like, mode) {
@@ -102,7 +118,7 @@ function loadCard(imageUrl, titleValue, idElement, like, mode) {
     // addEventListener like delete
     cardElement.querySelector('.places__place-like').addEventListener('click', likeCard)
     cardElement.querySelector('.places__place-delete').addEventListener('click', deleteCard)
-    cardElement.querySelector('.places__place-image').addEventListener('click', viewPopupImage)
+    cardElement.querySelector('.places__place-image').addEventListener('click', viewImage)
     
     if (mode == 1){
         cardsContainer.prepend(cardElement);
@@ -176,9 +192,6 @@ addCardButton.addEventListener('click', AddCard);
 addForm.addEventListener('submit', handleFormAddSubmit);
 //
 function viewPopupImage() {
-    let popupImage = viewImagePopup.querySelectorAll('.popup__view-image');
-    let popupImageTitle = viewImagePopup.querySelectorAll('.popup__view-image-title');
-
     viewImagePopup.classList.remove('popup_closed');
     viewImagePopup.classList.add('popup_opened');
 }
