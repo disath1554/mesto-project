@@ -7,6 +7,7 @@ const addForm =  addCardPopup.querySelector('form');
 // close form
 const closeProfileEditButton = editProfilePopup.querySelector('.popup__button-close');
 const closeCardAddButton = addCardPopup.querySelector('.popup__button-close');
+const closePopupImageButton = viewImagePopup.querySelector('.popup__button-close');
 // open popup edit add
 const editProfileButton = document.querySelector('.profile__button-edit');
 const addCardButton = document.querySelector('.profile__button-add');
@@ -16,7 +17,7 @@ const createCardButton = addCardPopup.querySelector('.popup__form-button-save');
 //
 const cardsContainer = document.querySelector('.places');
 //
-let initialId = 0;
+let initialId = 0; // далее из БД
 const initialCards = [
     {
       name: 'Архыз',
@@ -56,19 +57,15 @@ function initPlacesCard() {
     });
     return res;
 }
-//
+// load cards
 const placesCard = initPlacesCard();
-function initCards() {
-    loadCards(placesCard, 0); 
-}
-//
-document.addEventListener("DOMContentLoaded", initCards);
-//
-function loadCards(arrCards, mode) {
-    arrCards.forEach(function(obj){
-        loadCard(obj.link, obj.name, obj.id, false, mode);
+
+function loadCards() {
+    placesCard.forEach(function(obj){
+        loadCard(obj, 0);
     });   
 }
+document.addEventListener("DOMContentLoaded", loadCards);
 // like card
 function likeCard(evt) {
     evt.target.classList.toggle('places__place-like_active');
@@ -80,34 +77,49 @@ function likeCard(evt) {
         }
     });
 }
-//
 // delete card
 function deleteCard(evt) {
-    evt.target.classList.toggle('places__place-like_active');
     let removeEvent = evt.target.parentElement.parentElement;
     let titleName = removeEvent.querySelector('.places__place-title-text').textContent;
     console.log(removeEvent.id)
     removeEvent.remove()
+    //+ check len cards
 }
+// 
+function viewImage(evt) {
+    let elem = evt.target.parentElement.parentElement;
+    let imgLink = elem.querySelector('.places__place-image').style.backgroundImage;
+    let imgTitle = elem.querySelector('.places__place-title-text').textContent;
+    //
+    let imgElement =  viewImagePopup.querySelector('.popup__view-image');    
+    imgElement.src = `${imgLink.slice(5, -2)}`;
+    imgElement.alt = imgTitle;
+    let titleElement =  viewImagePopup.querySelector('.popup__view-image-title');
+    titleElement.textContent = imgTitle;
+    //console.log(imgElement);
+    viewImagePopup.classList.remove('popup_closed');
+    viewImagePopup.classList.add('popup_opened');
+ }
 //
-//add cards into html
-function loadCard(imageUrl, titleValue, idElement, like, mode) {
+//add cards html
+function loadCard(obj, mode) {
     const cardTemplate = document.querySelector('#card-template').content;
     const cardElement = cardTemplate.querySelector('.places__place-card').cloneNode(true);
-    cardElement.id = idElement;
-    cardElement.querySelector('.places__place-title-text').textContent = titleValue;
-    cardElement.querySelector('.places__place-image').style.backgroundImage = `url(${imageUrl})`;
+    cardElement.id = obj.id;
+    cardElement.querySelector('.places__place-title-text').textContent = obj.name;
+    cardElement.querySelector('.places__place-image').style.backgroundImage = `url(${obj.link})`;
     
     // addEventListener like delete
     cardElement.querySelector('.places__place-like').addEventListener('click', likeCard)
     cardElement.querySelector('.places__place-delete').addEventListener('click', deleteCard)
-    
+    cardElement.querySelector('.places__place-image').addEventListener('click', viewImage)
+    // + check obj.like
+    //
     if (mode == 1){
         cardsContainer.prepend(cardElement);
-    } else {
-        cardsContainer.append(cardElement);
-    }
-    
+        } else {
+            cardsContainer.append(cardElement);
+    }   
   }
 //
 function editProfile() {
@@ -134,7 +146,7 @@ function handleFormEditSubmit(evt) {
     //
     let profile_name = document.querySelector('.profile__name');
     let profile_about = document.querySelector('.profile__subtitle');
-    profile_name.textContent = `${inputs[0].value}`;
+    profile_name.textContent = `${inputs[0].value}` + '\u00A0';
     profile_about.textContent = `${inputs[1].value}`;
     closeEditProfile();
 }
@@ -165,7 +177,7 @@ function handleFormAddSubmit(evt) {
     obj['link'] = `${inputs[1].value}`;
     obj['like'] = false;
     placesCard.unshift(obj);
-    loadCard(obj['link'], obj['name'], obj['id'], obj['like'], 1);
+    loadCard(obj, 1);
     closeAddCard();
 }
 //
@@ -173,17 +185,17 @@ closeCardAddButton.addEventListener('click', closeAddCard);
 addCardButton.addEventListener('click', AddCard);
 addForm.addEventListener('submit', handleFormAddSubmit);
 //
-function viewImage() {
-    let popupImage = viewImagePopup.querySelectorAll('.popup__view-image');
-    let popupImageTitle = viewImagePopup.querySelectorAll('.popup__view-image-title');
-
+function viewPopupImage() {
     viewImagePopup.classList.remove('popup_closed');
     viewImagePopup.classList.add('popup_opened');
 }
 //
-function viewImage() {
-    addCardPopup.classList.remove('popup_opened');
-    addCardPopup.classList.add('popup_closed');
+function closePopupImage() {
+    viewImagePopup.classList.remove('popup_opened');
+    viewImagePopup.classList.add('popup_closed');
 }
+closePopupImageButton.addEventListener('click', closePopupImage);
+
+
 
 

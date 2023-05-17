@@ -1,0 +1,19 @@
+.popup__container-image {
+    max-width: min(63.75vw, 816px);
+    max-height: min(75vh, 540px);
+    background: none;
+    align-items: flex-start;
+    position: relative;
+}
+
+@media screen and (max-width: 875px) {
+    .popup__container-image {
+        max-width: 87.75vw;
+    } 
+}
+
+@media screen and (max-width: 575px) {
+    .popup__container-image {
+        max-width: 90vw;
+    } 
+}

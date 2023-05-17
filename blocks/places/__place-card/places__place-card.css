@@ -1,5 +1,5 @@
 .places__place-card {
-    width: 100%;
+    width: max(246px, 100%);
     background-color: white;
     border-radius: 10px;
 }
