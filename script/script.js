@@ -23,6 +23,8 @@ const cardsContainer = document.querySelector('.places');
 const cardTemplate = document.querySelector('#card-template').content;
 const cardElement = cardTemplate.querySelector('.places__place-card');
 //
+const popupItems = [editProfilePopup, addCardPopup, viewImagePopup];
+//
 const placeCardsList = [
     {
       name: 'Архыз',
@@ -149,4 +151,29 @@ closePopupImageButton.addEventListener('click', function(){
     closePopup(viewImagePopup);
 });
 
+document.addEventListener('click', function(evt){
+    if (evt.target.classList.contains('popup')){
+        return closePopup(evt.target);
+    }
+
+    if (evt.target.classList.contains('popup__view-image')){ 
+        return closePopup(viewImagePopup);
+    }    
+
+    if (evt.target.name == 'profiledit') { 
+        return closePopup(editProfilePopup); 
+    }
+    
+    if ((evt.target.name == 'newplace') ||
+        (evt.target.classList.contains('popup__container')) ||
+        (evt.target.classList.contains('popup__form-heading'))){ 
+            popupItems.forEach((item) => closePopup(item));  
+    }   
+});
+
+document.addEventListener('keyup', function(evt){
+    if (evt.key == 'Escape') {
+        popupItems.forEach((item) => closePopup(item));    
+    }
+});
 

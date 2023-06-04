@@ -1,0 +1,9 @@
+.popup__form-vaild-input {
+    font-size: .75rem;
+    line-height: 1.21;
+    font-style: normal;
+    font-weight: 400;
+    color: #f00;
+    margin: 5px 0 0 0;
+    padding: 0;
+}

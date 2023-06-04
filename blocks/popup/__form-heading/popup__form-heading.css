@@ -1,14 +1,12 @@
 .popup__form-heading {
     font-size: 1.5rem;
     font-weight: 900;
+    font-style: normal;
     color: black;
     line-height: 1.2;
-    align-self: start;
     text-align: left;
     padding: 0;
-    margin: 0;
-    padding-top: 34px;
-    margin-bottom: 54px;
+    margin: 0 0 54px 0;
     border: 0;
 }
 

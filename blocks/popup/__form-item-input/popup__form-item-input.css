@@ -7,12 +7,11 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding: 0;
     padding-bottom: 11px;
-    margin-bottom: 20px;
+    margin-top: 30px; 
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
-
-.popup__form-item-input:last-child {
-    margin-bottom: 0px;
+.popup__form-item-input:first-child{
+    margin-top: 0px;
 }
