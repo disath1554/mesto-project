@@ -1,4 +1,5 @@
-.popup__form-vaild-input {
+.form__input-error {
+    display: none;
     font-size: .75rem;
     line-height: 1.21;
     font-style: normal;
@@ -7,3 +8,4 @@
     margin: 5px 0 0 0;
     padding: 0;
 }
+

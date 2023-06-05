@@ -20,7 +20,7 @@
             </div>
             <div class="profile__info">
                 <div class="profile__info-container">
-                    <h1 class="profile__name">Жак-Ив Кусто&nbsp;</h1>
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
                     <button type="button" class="profile__button-edit"></button>
                 </div>
                 <p class="profile__subtitle">Исследователь океана</p>
@@ -38,33 +38,55 @@
 <div class="popup popup_closed" id="popup_edit_profile">
     <div class="popup__container">
         <button type="button" class="popup__button-close"></button>
-        <form name="profiledit" method="post" novalidate>
-            <h2 class="popup__form-heading">Редактировать профиль</h2>
-            <fieldset class="popup__form-item">
-                <input  type="text" class="popup__form-item-input" placeholder="Имя" name="username" 
-                        id="user_name" required minlength="7">
-                <span for="user_name" class="popup__form-vaild-input">Вы пропустили это поле.
-
-                </span>
-                <input type="text" class="popup__form-item-input" placeholder="О себе" name="aboutself" id="about_self">
-                <label for="title_card" class="popup__form-vaild-input">Минимальное количество символов: 2. Сейчас  длина текста 1 символ.</label>
+        <form class="form" name="profiledit" method="post" novalidate>
+            <h2 class="form__heading">Редактировать профиль</h2>
+            <fieldset class="form__set">
+                <input  type="text" class="form__input" 
+                    placeholder="Имя" name="username" 
+                    id="user_name"
+                    minlength="2" maxlength="40"
+                    pattern="^[a-zA-ZА-Яа-яЁё\-\s]+$"
+                    data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
+                    data-error-empty="Вы пропустили это поле."
+                    required>
+                <span class="form__input-error username-error"></span>
+                <input type="text" class="form__input" 
+                    placeholder="О себе" name="aboutself"
+                    id="about_self"
+                    minlength="2" maxlength="40" 
+                    pattern="^[a-zA-ZА-Яа-яЁё\-\s]+$"
+                    data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
+                    data-error-empty="Вы пропустили это поле."
+                    required>
+                <span class="form__input-error aboutself-error"></span>
             </fieldset>
-        <button type="submit" class="popup__form-item popup__form-button-save" value="Сохранить">Сохранить</button>
+        <button type="submit" class="form__button" value="Сохранить">Сохранить</button>
         </form>
     </div>               
 </div>
 <div class="popup popup_closed" id="popup_add_card">
     <div class="popup__container">
         <button type="button" class="popup__button-close"></button>
-        <form name="newplace" method="post">
-            <h2 class="popup__form-heading">Новое место</h2>
-            <fieldset class="popup__form-item">
-                <input type="text" class="popup__form-item-input" placeholder="Название" name="titlecard" id="title_card">
-                <label for="title_card" class="popup__form-vaild-input">Вы пропустили это поле.</label>
-                <input type="text" class="popup__form-item-input" placeholder="Ссылка на картинку" name="refcard" id="ref_card">
-                <label for="ref_card" class="popup__form-vaild-input">Введите адрес сайта.</label>
+        <form class="form" name="newplace" novalidate>
+            <h2 class="form__heading">Новое место</h2>
+            <fieldset class="form__set">
+                <input type="text" class="form__input" 
+                    placeholder="Название" name="titlecard" id="title_card"
+                    minlength="2" maxlength="25" 
+                    pattern="^[a-zA-ZА-Яа-яЁё\-\s]+$"
+                    data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
+                    data-error-empty="Вы пропустили это поле."
+                    required>
+                <span class="form__input-error titlecard-error"></span>
+                <input type="url" class="form__input" 
+                    placeholder="Ссылка на картинку" name="refcard" id="ref_card"
+                    pattern="[http][s]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?"
+                    data-error-message="Введите адрес сайта."
+                    data-error-empty="Вы пропустили это поле."
+                    required>
+                <span class="form__input-error refcard-error"></span>
             </fieldset>
-        <button type="submit" class="popup__form-button-save popup__form-button-save_disable" value="Создать">Создать</button>
+        <button type="submit" class="form__button" value="Создать">Создать</button>
         </form>
     </div>               
 </div>
