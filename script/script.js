@@ -78,7 +78,7 @@ const checkInputValidity = (formElement, inputElement) => {
   }
 
     if (!inputElement.validity.valid) {
-      showInputError(formElement, inputElement, inputElement.validationMessage);
+      showInputError(formElement, inputElement, inputElement.dataset.errorMessage);
     } else {
       hideInputError(formElement, inputElement);
     }
