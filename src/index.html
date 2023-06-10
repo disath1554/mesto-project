@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  
 </head>
 <body class="page">
 <!--header-->
 <header class="header">
-    <img class="header__logo" src="./images/logo-mesto.svg" alt="логотип">
+    <img class="header__logo" src="<%=require('./images/logo-mesto.svg')%>" alt="Логотип">
 </header>
 <main class="content">
     <section class="profile">
         <div class="profile__avatar">
             <div class="profile__image-container">
-                <img class="profile__image" src="./images/profile-image-2.jpg" alt="изображение профиля">
+                <img class="profile__image" src="<%=require('./images/profile-image-2.jpg')%>" alt="Изображение профиля">
             </div>
             <div class="profile__info">
                 <div class="profile__info-container">
@@ -48,8 +48,9 @@
                     pattern="^[a-zA-ZА-Яа-яЁё\-\s]+$"
                     data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
                     data-error-empty="Вы пропустили это поле."
+                    data-error=""
                     required>
-                <span class="form__input-error username-error"></span>
+                <span class="form__error username-error"></span>
                 <input type="text" class="form__input" 
                     placeholder="О себе" name="aboutself"
                     id="about_self"
@@ -57,10 +58,11 @@
                     pattern="^[a-zA-ZА-Яа-яЁё\-\s]+$"
                     data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
                     data-error-empty="Вы пропустили это поле."
+                    data-error=""
                     required>
-                <span class="form__input-error aboutself-error"></span>
+                <span class="form__error aboutself-error"></span>
             </fieldset>
-        <button type="submit" class="form__button" value="Сохранить">Сохранить</button>
+        <button type="submit" class="form__button " value="Сохранить">Сохранить</button>
         </form>
     </div>               
 </div>
@@ -76,14 +78,15 @@
                     pattern="^[a-zA-ZА-Яа-яЁё\-\s]+$"
                     data-error-message="Разрешены латинские, кириллические буквы, знаки дефиса и пробелы."
                     data-error-empty="Вы пропустили это поле."
+                    data-error=""
                     required>
-                <span class="form__input-error titlecard-error"></span>
+                <span class="form__error titlecard-error"></span>
                 <input type="url" class="form__input" 
                     placeholder="Ссылка на картинку" name="refcard" id="ref_card"
-                    data-error-message="Введите адрес сайта."
                     data-error-empty="Вы пропустили это поле."
+                    data-error="Введите адрес сайта."
                     required>
-                <span class="form__input-error refcard-error"></span>
+                <span class="form__error refcard-error"></span>
             </fieldset>
         <button type="submit" class="form__button" value="Создать">Создать</button>
         </form>
@@ -113,7 +116,5 @@
         </div>
     </div>
 </template>
-<!---->
-<script src="./script/script.js"></script>
 </body>
 </html>
