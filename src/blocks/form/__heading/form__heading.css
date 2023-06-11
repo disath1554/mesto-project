@@ -12,8 +12,9 @@
 
 @media screen and (max-width: 575px) {
     .form__heading {
+        text-align: center;
         font-size: 1.125rem;
-        margin: 0 22px 70px 22px;
+        margin: 0 auto 70px auto;
         padding-top: 25px;
     }
 }

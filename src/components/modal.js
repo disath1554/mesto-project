@@ -1,6 +1,6 @@
 import { openPopup, closePopup } from './utils.js';
 import {createCard} from './card.js';
-
+import {hideInputError, checkInputValidity, toggleButtonState} from './validate.js';
 
 const editProfile = (formElement, profileName, profileAbout) => {
     formElement.username.value = `${profileName.textContent}`;
@@ -38,24 +38,26 @@ export const initModals = (settingsValid) => {
 
     const resetInputError = (formElement, settingsValid) => {
         const inputList = Array.from(formElement.querySelectorAll(settingsValid.inputSelector));
+        const buttonElement = formElement.querySelector(settingsValid.submitButtonSelector);
         inputList.forEach((inputElement) => {
-            const errorElement = formElement.querySelector(`.${inputElement.name}-error`);
-            inputElement.classList.remove(settingsValid.inputErrorClass);
-            errorElement.classList.remove(settingsValid.errorClass);
-            errorElement.textContent = '';
+            hideInputError(settingsValid, formElement, inputElement);
+        });
+        toggleButtonState(settingsValid, inputList, buttonElement);
+    };
+
+    const initProfileButton = (formElement, settingsValid) => { 
+        const inputList = Array.from(formElement.querySelectorAll(settingsValid.inputSelector));
+        const buttonElement = formElement.querySelector(settingsValid.submitButtonSelector); 
+        inputList.forEach((inputElement) => {
+            checkInputValidity(settingsValid, formElement, inputElement);
+        toggleButtonState(settingsValid, inputList, buttonElement);
         });
     };
-  
-    const initProfileButton = (formElement, settingsValid) => {
-      const buttonElement = formElement.querySelector(settingsValid.submitButtonSelector);
-      buttonElement.disabled = false;
-      buttonElement.classList.remove(settingsValid.inactiveButtonClass);
-    };
-  
+
     editProfileButton.addEventListener('click', function(){
         resetInputError(editForm, settingsValid); 
-        initProfileButton(editForm, settingsValid); 
         editProfile(editForm, profileName, profileAbout);
+        initProfileButton(editForm, settingsValid);
     });
 
     addCardButton.addEventListener('click', function(){
