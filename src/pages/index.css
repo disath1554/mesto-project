@@ -18,6 +18,7 @@
 @import url(../blocks/profile/__subtitle/profile__subtitle.css);
 @import url(../blocks/profile/__button-edit/profile__button-edit.css);
 @import url(../blocks/profile/__button-add/profile__button-add.css);
+@import url(../blocks/profile/__button-avatar-edit/profile__button-avatar-edit.css);
 /*_*/
 @import url(../blocks/places/places.css);
 @import url(../blocks/places/__place-card/places__place-card.css);

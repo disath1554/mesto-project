@@ -2,4 +2,5 @@
     width: 127.5px;
     height: 127.5px;
     flex-shrink: 0;
+    position: relative;
 }

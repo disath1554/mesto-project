@@ -32,9 +32,21 @@ function saveUserProfile(newName, newAbout) {
     });
 }
 
+function saveUserAvatar(newImage) {
+    return fetch(`${serverUrl}/users/me/avatar`, {
+        method: 'PATCH',
+        headers: {
+            authorization: token,
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify({
+            avatar: newImage
+        })
+    });
+}
 
 function createNewCard(newName, newLink) {
-    const res = fetch(`${serverUrl}/cards`, {
+    return fetch(`${serverUrl}/cards`, {
         method: 'POST',
         headers: {
             authorization: token
@@ -44,7 +56,7 @@ function createNewCard(newName, newLink) {
             link: newLink
         })
     });
-    return getResponeData(res);
 }
-      
-export {getUserProfile, saveUserProfile, getCardsList, createNewCard};
+
+
+export {getUserProfile, saveUserProfile, getCardsList, createNewCard, saveUserAvatar};
