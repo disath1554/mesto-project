@@ -1,3 +1,4 @@
+import {saveUserProfile} from './api.js'
 import {openPopup, closePopup, loadImage} from './utils.js';
 import {createCard} from './card.js';
 import {hideInputError, checkInputValidity, toggleButtonState} from './validate.js';
@@ -11,9 +12,26 @@ const editProfile = (formElement, profileName, profileAbout) => {
 
 const handleFormEditSubmit = (evt, formElement, profileName, profileAbout) => {
     evt.preventDefault();
-    profileName.textContent = `${formElement.username.value}`;
-    profileAbout.textContent = `${formElement.aboutself.value}`;
-    closePopup(formElement.closest('.popup'));
+    const formButton = formElement.querySelector('.form__button');
+    formButton.textContent = "Сохранение..."
+    saveUserProfile(`${formElement.username.value}`, `${formElement.aboutself.value}`)
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } return Promise.reject(res.status);
+            })
+        .then((res) =>{
+            profileName.textContent = `${formElement.username.value}`;
+            profileAbout.textContent = `${formElement.aboutself.value}`;
+            closePopup(formElement.closest('.popup'));
+        })
+        .catch((err) => {
+            renderError(`Ошибка FormEditSubmit: ${err}`);
+        })
+        .finally(() => {
+            formButton.textContent = "Сохранить"
+        });
+    
 };
 
 const handleFormAddSubmit = (evt, formElement, cardsContainer) => {
@@ -50,7 +68,7 @@ const initModals = (settingsValid) => {
     const addCardButton = document.querySelector('.profile__button-add');
     const profileName = document.querySelector('.profile__name');
     const profileAbout = document.querySelector('.profile__subtitle');
-
+    
 
     const resetInputError = (formElement, settingsValid) => {
         const inputList = Array.from(formElement.querySelectorAll(settingsValid.inputSelector));

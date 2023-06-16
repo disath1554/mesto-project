@@ -1,6 +1,5 @@
 import {getCardsList} from './api.js';
 import {openPopup, renderError} from './utils.js'
-import {} from './utils.js';
 
 const cardsContainer = document.querySelector('.places');
 const cardTemplate = document.querySelector('#card-template').content;
@@ -56,7 +55,7 @@ function initCardsList(userId) {
         loadCards(res, userId);
     })
     .catch((err) => {
-        renderError(`Ошибка: ${err}`);
+        renderError(`Ошибка initCardsList: ${err}`);
     });
 }
 
