@@ -1,4 +1,4 @@
-import {saveUserProfile, saveUserAvatar} from './api.js'
+import {saveUserProfile, saveUserAvatar, createNewCard} from './api.js'
 import {openPopup, closePopup, loadImage, renderError} from './utils.js';
 import {createCard} from './card.js';
 import {hideInputError, checkInputValidity, toggleButtonState} from './validate.js';
@@ -13,7 +13,7 @@ const editProfile = (formElement, profileName, profileAbout) => {
 const handleFormEditSubmit = (evt, formElement, profileName, profileAbout) => {
     evt.preventDefault();
     const formButton = formElement.querySelector('.form__button');
-    formButton.textContent = "Сохранение..."
+    formButton.textContent = "Сохранение...";
     saveUserProfile(`${formElement.username.value}`, `${formElement.aboutself.value}`)
         .then((res) => {
             if (res.ok) {
@@ -29,19 +29,35 @@ const handleFormEditSubmit = (evt, formElement, profileName, profileAbout) => {
             renderError(`Ошибка FormEditSubmit: ${err}`);
         })
         .finally(() => {
-            formButton.textContent = "Сохранить"
+            formButton.textContent = "Сохранить";
         });
     
 };
 
 const handleFormAddSubmit = (evt, formElement, cardsContainer) => {
     evt.preventDefault();
-    const card = {}
-    card['name'] = `${formElement.titlecard.value}`;
-    card['link'] = `${formElement.refcard.value}`;
-    cardsContainer.prepend(createCard(card, true));
-    formElement.reset()
-    closePopup(formElement.closest('.popup'));
+    const formButton = formElement.querySelector('.form__button');
+    const newCardname = `${formElement.titlecard.value}`;
+    const newCardlink = `${formElement.refcard.value}`;
+    
+    formButton.textContent = "Сохранение...";
+    createNewCard(newCardname, newCardlink)
+    .then((res) => {
+        if (res.ok) {
+            return res.json();
+        } return Promise.reject(res.status);
+        })
+    .then((res) =>{
+        cardsContainer.prepend(createCard(res, true));
+        formElement.reset()
+        closePopup(formElement.closest('.popup'));
+    })
+    .catch((err) => {
+        renderError(`Ошибка FormAddSubmit: ${err}`);
+    })
+    .finally(() => {
+        formButton.textContent = "Сохранить";
+    });
 };
 
 const updateUserProfile = (res) => {
@@ -80,11 +96,11 @@ const handleFormEditAvatarSubmit = (evt, formElement) => {
             renderError(`Ошибка FormEditAvatarSubmit: ${err}`);
         })
         .finally(() => {
+            formElement.reset()
             formButton.textContent = "Сохранить"
         });   
 };
   
-
 const initModals = (settingsValid) => {
     const editProfilePopup = document.getElementById('popup_edit_profile');
     const editForm =  editProfilePopup.querySelector('form');

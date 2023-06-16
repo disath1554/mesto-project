@@ -17,7 +17,6 @@ function getCardsList() {
     });
 }
 
-
 function saveUserProfile(newName, newAbout) {
     return fetch(`${serverUrl}/users/me`, {
         method: 'PATCH',
@@ -36,8 +35,7 @@ function saveUserAvatar(newImage) {
     return fetch(`${serverUrl}/users/me/avatar`, {
         method: 'PATCH',
         headers: {
-            authorization: token,
-            'Content-Type': 'application/json'
+            authorization: token, 'Content-Type': 'application/json'
           },
         body: JSON.stringify({
             avatar: newImage
@@ -49,7 +47,7 @@ function createNewCard(newName, newLink) {
     return fetch(`${serverUrl}/cards`, {
         method: 'POST',
         headers: {
-            authorization: token
+            authorization: token,'Content-Type': 'application/json'
           },
         body: JSON.stringify({
             name: newName,

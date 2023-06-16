@@ -22,6 +22,7 @@ export const createCard = (card, isMyCard) => {
     cardItem.querySelector('.places__place-image').style.backgroundImage = `url(${card.link})`;
     
     const deleteButton = cardItem.querySelector('.places__place-delete');
+    
     if (isMyCard) {
         deleteButton.addEventListener('click', function() {
             const listItem = deleteButton.closest('.places__place-card');
@@ -65,7 +66,8 @@ function initCardsList(userId) {
 function loadCards(placeCardsList, userId) {
     const limit = 6;
     for (let i=0; i<limit;i+=1){
-        cardsContainer.append(createCard(placeCardsList[i], false));
+        const isMyCard = (userId === placeCardsList[i].owner._id);
+        cardsContainer.append(createCard(placeCardsList[i], isMyCard));
     }   
 }
 
