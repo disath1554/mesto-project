@@ -1,0 +1,10 @@
+.places__place-like-count {
+    margin: 3px 0 0;
+    font-weight: normal;
+    font-size: .8rem;
+    line-height: 1.;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #000;
+}

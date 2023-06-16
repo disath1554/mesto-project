@@ -36,6 +36,9 @@ export const createCard = (card, isMyCard) => {
         likeButton.classList.toggle('places__place-like_active');
     });
     
+    const count = card.likes.length;
+    const likeCount = cardItem.querySelector('.places__place-like-count');
+    likeCount.textContent = `${count}`;
     const imageContainer = cardItem.querySelector('.places__place-image');
     imageContainer.addEventListener('click', function() {
         viewImage(card.name, card.link);
@@ -59,7 +62,7 @@ function initCardsList(userId) {
     });
 }
 
-function loadCards(placeCardsList) {
+function loadCards(placeCardsList, userId) {
     const limit = 6;
     for (let i=0; i<limit;i+=1){
         cardsContainer.append(createCard(placeCardsList[i], false));
