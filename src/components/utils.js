@@ -17,6 +17,15 @@ const loadImage = (imageUrl, arg='avatar') => {
     });
 }; 
 
+const renderError = (err) => {
+    alert(err);
+};
+
+const contentShow = () => {
+    const hiddenBlock = document.querySelector('.content');
+    hiddenBlock.classList.remove('content_hide');
+};
+
 const setEscEventListener = (evt) => {
         if (evt.key === 'Escape') {
             const popupList = Array.from(document.querySelectorAll('.popup'));
@@ -55,4 +64,4 @@ document.addEventListener('click', function(evt){
     }
 });
 
-export {openPopup, closePopup, loadImage};
+export {openPopup, closePopup, loadImage, contentShow, renderError};

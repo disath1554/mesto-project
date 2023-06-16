@@ -1,4 +1,6 @@
-import {openPopup} from './utils.js'
+import {getCardsList} from './api.js';
+import {openPopup, renderError} from './utils.js'
+import {} from './utils.js';
 
 const cardsContainer = document.querySelector('.places');
 const cardTemplate = document.querySelector('#card-template').content;
@@ -43,13 +45,27 @@ export const createCard = (card, isMyCard) => {
     return cardItem;
 };
 
+function initCardsList(userId) {
+    getCardsList()
+    .then((res) => {
+        if (res.ok) {
+            return res.json();
+        } return Promise.reject(res.status);
+        })
+    .then((res) =>{
+        loadCards(res, userId);
+    })
+    .catch((err) => {
+        renderError(`Ошибка: ${err}`);
+    });
+}
 
-export function loadCards(placeCardsList) {
+function loadCards(placeCardsList) {
     const limit = 6;
     for (let i=0; i<limit;i+=1){
         cardsContainer.append(createCard(placeCardsList[i], false));
     }   
 }
 
-
+export {loadCards, initCardsList};
 

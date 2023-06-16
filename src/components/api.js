@@ -1,28 +1,18 @@
 import {loadCards} from './card.js';
 
-const serverUrl = 'https://nomoreparties.co/v1/plus-cohort-25';
-const setHeader = {
-      token: '75517d06-b879-461d-b656-080fd61e6a64',
-      'Content-Type': 'application/json'
-    };
-  
+const token =  '75517d06-b879-461d-b656-080fd61e6a64';
+const servUrl = 'https://nomoreparties.co/v1/plus-cohort-25'; 
 
-function getResponeData(res) {
-    if (!res.ok) {
-      return Promise.reject(`Ошибка: ${res.status}`);
+function getUserProfile() {
+    return  fetch(`${servUrl}/users/me`, {
+    headers: {
+      authorization: token
     }
-    return res.json();
+  });
 }
 
-async function getUserProfile() {
-    const res = await fetch(`${serverUrl}/users/me`, {
-        headers: setHeader
-    });
-    return getResponeData(res);
-}
-
-async function saveUserProfile(newName, newAbout) {
-    const res = await fetch(`${serverUrl}/users/me`, {
+function saveUserProfile(newName, newAbout) {
+    const res = fetch(`${servUrl}users/me`, {
         method: 'PATCH',
         headers: setHeader,
         body: JSON.stringify({
@@ -33,17 +23,17 @@ async function saveUserProfile(newName, newAbout) {
     return getResponeData(res);
 }
 
-async function getCardsList() {
-    const res = await fetch(`${serverUrl}/cards`, {
-        headers: setHeader
+function getCardsList() {
+    const res = fetch(`${serverUrl}/cards`, {
+        headers: token
     });
     return getResponeData(res);
 }
 
-async function createNewCard(newName, newLink) {
-    const res = await fetch(`${serverUrl}/cards`, {
+function createNewCard(newName, newLink) {
+    const res = fetch(`${serverUrl}/cards`, {
         method: 'POST',
-        headers: setHeader,
+        headers: token,
         body: JSON.stringify({
             name: newName,
             link: newLink
@@ -52,13 +42,4 @@ async function createNewCard(newName, newLink) {
     return getResponeData(res);
 }
       
-
-function getCardsList() {
-    return  fetch('https://nomoreparties.co/v1/plus-cohort-25/cards', {
-    headers: {authorization: token}
-    });
-}
-
-
-
-export {initMain, getUserProfile, saveUserProfile, getCardsList, createNewCard};
+export {getUserProfile, saveUserProfile, getCardsList, createNewCard};

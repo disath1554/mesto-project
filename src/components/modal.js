@@ -1,7 +1,7 @@
 import {openPopup, closePopup, loadImage} from './utils.js';
 import {createCard} from './card.js';
 import {hideInputError, checkInputValidity, toggleButtonState} from './validate.js';
-
+import {renderError} from './utils.js';
 
 const editProfile = (formElement, profileName, profileAbout) => {
     formElement.username.value = `${profileName.textContent}`;
@@ -33,15 +33,11 @@ const updateUserProfile = (res) => {
     profileAbout.textContent = res.about;
 };
 
-const renderError = (err) => {
-    alert(err);
-};
-
 const updateUserAvatar = (link) => {
-    loadImage(res.avatar)
+    loadImage(link)
     .then(() => {;})
     .catch((err) => {
-    renderError(`Ошибка: ${err}`);
+        renderError(`Ошибка: ${err}`);
     });
 };
 

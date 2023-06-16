@@ -1,8 +1,10 @@
 import '../pages/index.css';
 
 import {getUserProfile} from './api.js';
-import {updateUserProfile, updateUserAvatar} from './modals.js';
+import {updateUserProfile, updateUserAvatar, initModals} from './modal.js';
 import {enableValidation} from './validate.js';
+import {initCardsList} from './card.js';
+import {renderError} from './utils.js';
 
 
 window.onload = 
@@ -17,11 +19,22 @@ window.onload =
         };
         getUserProfile()
         .then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject(res.status);
+        })
+        .then((res) => {
             updateUserProfile(res);
-            updateUserAvatar(res.link);
-            enableValidation(validationConfig);
-    });
-};
+            updateUserAvatar(res.avatar);
+            initCardsList(res._id);
+            initModals(settingsValid);
+            enableValidation(settingsValid);
+        })
+        .catch((err) => {
+            renderError(`Ошибка: ${err}`);
+        });
+};  
 
 
     
