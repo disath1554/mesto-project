@@ -1,5 +1,22 @@
 // utils
 
+const loadImage = (imageUrl, arg='avatar') => {
+    if (arg === 'avatar') {
+      return new Promise((resolve, reject) => {
+          const image = document.querySelector('.profile__image');
+          image.src = imageUrl;
+          image.onerror = reject;
+          image.onload = resolve;
+      });
+    }
+    return new Promise((resolve, reject) => {
+      const new_image = document.createElement('img');
+      new_image.src = imageUrl;
+      new_image.onerror = reject;
+      new_image.onload = resolve;
+    });
+}; 
+
 const setEscEventListener = (evt) => {
         if (evt.key === 'Escape') {
             const popupList = Array.from(document.querySelectorAll('.popup'));
@@ -38,4 +55,4 @@ document.addEventListener('click', function(evt){
     }
 });
 
-export {openPopup, closePopup};
+export {openPopup, closePopup, loadImage};

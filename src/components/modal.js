@@ -1,6 +1,7 @@
-import { openPopup, closePopup } from './utils.js';
+import {openPopup, closePopup, loadImage} from './utils.js';
 import {createCard} from './card.js';
 import {hideInputError, checkInputValidity, toggleButtonState} from './validate.js';
+
 
 const editProfile = (formElement, profileName, profileAbout) => {
     formElement.username.value = `${profileName.textContent}`;
@@ -20,12 +21,31 @@ const handleFormAddSubmit = (evt, formElement, cardsContainer) => {
     const card = {}
     card['name'] = `${formElement.titlecard.value}`;
     card['link'] = `${formElement.refcard.value}`;
-    cardsContainer.prepend(createCard(card));
+    cardsContainer.prepend(createCard(card, true));
     formElement.reset()
     closePopup(formElement.closest('.popup'));
 };
 
-export const initModals = (settingsValid) => {
+const updateUserProfile = (res) => {
+    const profileName = document.querySelector('.profile__name');
+    const profileAbout = document.querySelector('.profile__subtitle');
+    profileName.textContent = res.name;
+    profileAbout.textContent = res.about;
+};
+
+const renderError = (err) => {
+    alert(err);
+};
+
+const updateUserAvatar = (link) => {
+    loadImage(res.avatar)
+    .then(() => {;})
+    .catch((err) => {
+    renderError(`Ошибка: ${err}`);
+    });
+};
+
+const initModals = (settingsValid) => {
     const editProfilePopup = document.getElementById('popup_edit_profile');
     const editForm =  editProfilePopup.querySelector('form');
     const addCardPopup = document.getElementById('popup_add_card');
@@ -74,3 +94,4 @@ export const initModals = (settingsValid) => {
         handleFormAddSubmit(evt, addForm, cardsContainer);
     });
 };
+export {updateUserProfile, updateUserAvatar, initModals}

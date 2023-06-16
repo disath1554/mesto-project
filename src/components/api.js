@@ -1,16 +1,11 @@
 import {loadCards} from './card.js';
 
-const setUrl = {
-    serv: 'https://mesto.nomoreparties.co/v1/plus-cohort-25',
-    head: {
+const serverUrl = 'https://nomoreparties.co/v1/plus-cohort-25';
+const setHeader = {
       token: '75517d06-b879-461d-b656-080fd61e6a64',
       'Content-Type': 'application/json'
-    }
-  }
-
-function renderError(err) {
-    alert(err);
-}
+    };
+  
 
 function getResponeData(res) {
     if (!res.ok) {
@@ -19,62 +14,44 @@ function getResponeData(res) {
     return res.json();
 }
 
-function getUserProfile() {
-    return fetch(`${setUrl}/users/me`, {
-      headers: setUrl.head
-    })
-      .then(res => getResponeData(res));
+async function getUserProfile() {
+    const res = await fetch(`${serverUrl}/users/me`, {
+        headers: setHeader
+    });
+    return getResponeData(res);
 }
 
-
-
-function renderUserProfile(res) {
-        const profileName = document.querySelector('.profile__name');
-        const profileAbout = document.querySelector('.profile__subtitle');
-        profileName.textContent = res.name;
-        profileAbout.textContent = res.about;
-        loadImage(res.avatar)
-            .then(() => {;})
-            .catch((err) => {
-            renderError(`Ошибка: ${err}`);
-  });
+async function saveUserProfile(newName, newAbout) {
+    const res = await fetch(`${serverUrl}/users/me`, {
+        method: 'PATCH',
+        headers: setHeader,
+        body: JSON.stringify({
+            name: newName,
+            about: newAbout
+        })
+    });
+    return getResponeData(res);
 }
 
-
-function loadImage(imageUrl, arg='avatar') {
-    if (arg === 'avatar') {
-      return new Promise((resolve, reject) => {
-          const image = document.querySelector('.profile__image');
-          image.src = imageUrl;
-          image.onerror = reject;
-          image.onload = resolve;
-      });
-    }
-    return new Promise((resolve, reject) => {
-      const new_image = document.createElement('img');
-      new_image.src = imageUrl;
-      new_image.onerror = reject;
-      new_image.onload = resolve;
+async function getCardsList() {
+    const res = await fetch(`${serverUrl}/cards`, {
+        headers: setHeader
     });
-  } 
+    return getResponeData(res);
+}
 
-
-
-function loadUserProfile() {
-    getUserProfile()
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
-    .then((res) => {
-      renderUserProfile(res);
-    })
-    .catch((err) => {
-      renderError(`Ошибка: ${err}`);
+async function createNewCard(newName, newLink) {
+    const res = await fetch(`${serverUrl}/cards`, {
+        method: 'POST',
+        headers: setHeader,
+        body: JSON.stringify({
+            name: newName,
+            link: newLink
+        })
     });
-}        
+    return getResponeData(res);
+}
+      
 
 function getCardsList() {
     return  fetch('https://nomoreparties.co/v1/plus-cohort-25/cards', {
@@ -82,27 +59,6 @@ function getCardsList() {
     });
 }
 
-function loadCardsList() {
-    getCardsList()
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
-    })
-    .then((res) => {
-      loadCards(res);
-    })
-    .catch((err) => {
-      renderError(`Ошибка: ${err}`);
-    });
-}       
 
 
-
-function initMain() {
-    loadUserProfile();
-    loadCardsList();
-}
-
-export {initMain, getUserProfile};
+export {initMain, getUserProfile, saveUserProfile, getCardsList, createNewCard};
