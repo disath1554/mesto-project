@@ -33,6 +33,7 @@ export const createCard = (card, isMyCard) => {
     }
           
     const likeButton = cardItem.querySelector('.places__place-like');
+    if (!isMyCard) {
     likeButton.addEventListener('click', function() {
         likeButton.classList.toggle('places__place-like_active');
     });
@@ -72,4 +73,3 @@ function loadCards(placeCardsList, userId) {
 }
 
 export {loadCards, initCardsList};
-
