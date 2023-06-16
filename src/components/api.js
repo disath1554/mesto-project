@@ -12,18 +12,18 @@ function renderError(err) {
     alert(err);
 }
 
-function getData(res) {
+function getResponeData(res) {
     if (!res.ok) {
       return Promise.reject(`Ошибка: ${res.status}`);
     }
     return res.json();
 }
 
-export function getUserProfile() {
+function getUserProfile() {
     return fetch(`${setUrl}/users/me`, {
       headers: setUrl.head
     })
-      .then(res => getData(res));
+      .then(res => getResponeData(res));
 }
 
 
@@ -105,4 +105,4 @@ function initMain() {
     loadCardsList();
 }
 
-export {initMain};
+export {initMain, getUserProfile};
