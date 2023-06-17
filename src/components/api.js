@@ -64,3 +64,22 @@ export function deleteCard(id) {
         }
     });
 }
+
+export function putLikeCard(id) {
+    return fetch(`${serverUrl}/cards/likes/${id}`, {
+        method: 'PUT',
+        headers: {
+            authorization: token
+        }
+    });
+}
+
+export function deleteLikeCard(id) {
+    return fetch(`${serverUrl}/cards/likes/${id}`, {
+        method: 'DELETE',
+        headers: {
+            authorization: token
+        }
+    });
+}
+

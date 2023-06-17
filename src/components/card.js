@@ -1,4 +1,4 @@
-import {getCardsList, deleteCard} from './api.js';
+import {getCardsList, deleteCard, putLikeCard, deleteLikeCard} from './api.js';
 import {openPopup, renderError} from './utils.js';
 
 const cardsContainer = document.querySelector('.places');
@@ -16,8 +16,38 @@ const viewImage = (name, url) => {
     openPopup(viewImagePopup);
 };
 
-const addLikeCard = (card, likeButton) => {
+const likeItCard = (id, likeButton, likeCountItem) => {
+    const isLike = likeButton.classList.contains("places__place-like_active");
     likeButton.classList.toggle('places__place-like_active');
+    if (isLike) {
+        deleteLikeCard(id)
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } return Promise.reject(res.status);
+        })
+        .then((res) =>{
+            const likeCount = res.likes.length;
+            likeCountItem.textContent = likeCount;
+        })
+        .catch((err) => {
+            renderError(`Ошибка deleteLikeCard: ${err}`);
+        }); 
+    } else {
+        putLikeCard(id)
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } return Promise.reject(res.status);
+        })
+        .then((res) =>{
+            const likeCount = res.likes.length;
+            likeCountItem.textContent = likeCount;
+        })
+        .catch((err) => {
+            renderError(`Ошибка addLikeCard: ${err}`);
+        });
+    }  
 };
 
 const deleteImageCard = (id, listItem) => {
@@ -50,17 +80,16 @@ export const createCard = (card, isMyCard) => {
     } else {
         deleteButton.style.visibility = "hidden"; 
     }
-          
+    const count = card.likes.length;
+    const likeCountItem = cardItem.querySelector('.places__place-like-count');
+    likeCountItem.textContent = `${count}`;      
     const likeButton = cardItem.querySelector('.places__place-like');
     if (!isMyCard) {
     likeButton.addEventListener('click', function() {
-        addLikeCard(cardId, likeButton);
+        likeItCard(cardId, likeButton, likeCountItem);
         });
     }
     
-    const count = card.likes.length;
-    const likeCount = cardItem.querySelector('.places__place-like-count');
-    likeCount.textContent = `${count}`;
     const imageContainer = cardItem.querySelector('.places__place-image');
     imageContainer.addEventListener('click', function() {
         viewImage(card.name, card.link);
