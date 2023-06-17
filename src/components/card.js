@@ -65,7 +65,7 @@ const deleteImageCard = (id, listItem) => {
     });
 };
 
-export const createCard = (card, isMyCard) => {
+export const createCard = (card, isMyCard=true, isMeLike=false) => {
     const cardId = card._id;
     const cardItem = cardElement.cloneNode(true);
     cardItem.querySelector('.places__place-title-text').textContent = card.name;
@@ -82,8 +82,12 @@ export const createCard = (card, isMyCard) => {
     }
     const count = card.likes.length;
     const likeCountItem = cardItem.querySelector('.places__place-like-count');
-    likeCountItem.textContent = `${count}`;      
+    likeCountItem.textContent = `${count}`;
+         
     const likeButton = cardItem.querySelector('.places__place-like');
+    if (isMeLike) {
+        likeButton.classList.add('places__place-like_active');
+    } 
     if (!isMyCard) {
     likeButton.addEventListener('click', function() {
         likeItCard(cardId, likeButton, likeCountItem);
@@ -114,11 +118,11 @@ function initCardsList(userId) {
 }
 
 function loadCards(placeCardsList, userId) {
-    const limit = 6;
-    for (let i=0; i<limit;i+=1){
-        const isMyCard = (userId === placeCardsList[i].owner._id);
-        cardsContainer.append(createCard(placeCardsList[i], isMyCard));
-    }   
-}
+    placeCardsList.forEach(item => {
+        const  isMeLike = (item.likes && item.likes.some(like => like._id === userId));
+        const isMyCard = (userId === item.owner._id);        
+        cardsContainer.append(createCard(item, isMyCard, isMeLike));
+    });   
+}   
 
 export {loadCards, initCardsList};
