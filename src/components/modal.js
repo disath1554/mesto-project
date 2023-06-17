@@ -10,7 +10,14 @@ const editProfile = (formElement, profileName, profileAbout) => {
     openPopup(formElement.closest('.popup'));
 };
 
-const handleFormEditSubmit = (evt, formElement, profileName, profileAbout) => {
+const updateUserProfile = (name, about) => {
+    const profileName = document.querySelector('.profile__name');
+    const profileAbout = document.querySelector('.profile__subtitle');
+    profileName.textContent = name;
+    profileAbout.textContent = about;
+};
+
+const handleFormEditSubmit = (evt, formElement) => {
     evt.preventDefault();
     const formButton = formElement.querySelector('.form__button');
     formButton.textContent = "Сохранение...";
@@ -21,25 +28,72 @@ const handleFormEditSubmit = (evt, formElement, profileName, profileAbout) => {
             } return Promise.reject(res.status);
             })
         .then((res) =>{
-            profileName.textContent = `${formElement.username.value}`;
-            profileAbout.textContent = `${formElement.aboutself.value}`;
-            closePopup(formElement.closest('.popup'));
+            updateUserProfile(res.name, res.about);
         })
         .catch((err) => {
             renderError(`Ошибка FormEditSubmit: ${err}`);
         })
         .finally(() => {
+            formElement.reset()
             formButton.textContent = "Сохранить";
+            closePopup(formElement.closest('.popup'));
         }); 
 };
 
-const handleFormAddSubmit = (evt, formElement, cardsContainer) => {
+const updateAvatarOnPage = (link) => {
+    const image = document.querySelector('.profile__image');
+    image.src = link;
+};
+
+const updateUserAvatar = (link) => {
+    loadImage(link)
+    .then(() => {
+        updateAvatarOnPage(link);
+      })
+    .catch((err) => {
+        renderError(`Ошибка загрузки изображения: ${err}`);
+    })
+};
+
+const updateAvatarOnServer = (formElement, link) => {
+    saveUserAvatar(link)
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } return Promise.reject(res.status);
+            })
+        .then((res) =>{
+            updateAvatarOnPage(res.avatar);
+        })
+        .catch((err) => {
+            renderError(`Ошибка: ${err}`);
+        });
+};
+
+const handleFormEditAvatarSubmit = (evt, formElement) => {
     evt.preventDefault();
     const formButton = formElement.querySelector('.form__button');
-    const newCardname = `${formElement.titlecard.value}`;
-    const newCardlink = `${formElement.refcard.value}`;
-    
+    const newImage = `${formElement.refava.value}`;
     formButton.textContent = "Сохранение...";
+    loadImage(newImage)
+    .then(() => {
+        updateAvatarOnServer(formElement, newImage);
+      })
+    .catch((err) => {
+        renderError(`Ошибка загрузки изображения: ${err}`);
+    }).finally(() => {
+        formElement.reset()
+        formButton.textContent = "Сохранить"
+        closePopup(formElement.closest('.popup'));
+    });  
+};
+
+const updateCardOnPage = (card) => {
+    const cardsContainer = document.querySelector('.places');
+    cardsContainer.prepend(createCard(card));
+};
+
+const updateCardOnServer = (newCardname, newCardlink) => {
     createNewCard(newCardname, newCardlink)
     .then((res) => {
         if (res.ok) {
@@ -47,59 +101,33 @@ const handleFormAddSubmit = (evt, formElement, cardsContainer) => {
         } return Promise.reject(res.status);
         })
     .then((res) =>{
-        cardsContainer.prepend(createCard(res, true));
-        formElement.reset()
-        closePopup(formElement.closest('.popup'));
+        updateCardOnPage(res);
     })
     .catch((err) => {
-        renderError(`Ошибка FormAddSubmit: ${err}`);
+        renderError(`Ошибка : ${err}`);
+    });
+}
+
+const handleFormAddSubmit = (evt, formElement) => {
+    evt.preventDefault();
+    const formButton = formElement.querySelector('.form__button');
+    const newCardname = `${formElement.titlecard.value}`;
+    const newCardlink = `${formElement.refcard.value}`;
+    formButton.textContent = "Сохранение...";
+    loadImage(newCardlink)
+    .then(() => {
+        updateCardOnServer(newCardname, newCardlink);
+      })
+    .catch((err) => {
+        renderError(`Ошибка get img: ${err}`);
     })
     .finally(() => {
         formButton.textContent = "Сохранить";
+        formElement.reset()
+        closePopup(formElement.closest('.popup'));
     });
 };
 
-const updateUserProfile = (res) => {
-    const profileName = document.querySelector('.profile__name');
-    const profileAbout = document.querySelector('.profile__subtitle');
-    profileName.textContent = res.name;
-    profileAbout.textContent = res.about;
-};
-
-const updateUserAvatar = (link) => {
-    loadImage(link)
-    .then(() => {;})
-    .catch((err) => {
-        renderError(`Ошибка: ${err}`);
-    });
-};
-
-const handleFormEditAvatarSubmit = (evt, formElement) => {
-    evt.preventDefault();
-    const formButton = formElement.querySelector('.form__button');
-    const newImage = `${formElement.refava.value}`;
-    
-    formButton.textContent = "Сохранение..."
-    saveUserAvatar(newImage)
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            } return Promise.reject(res.status);
-            })
-        .then((res) =>{
-            renderError(newImage);
-            updateUserAvatar(newImage);
-            closePopup(formElement.closest('.popup'));
-        })
-        .catch((err) => {
-            renderError(`Ошибка FormEditAvatarSubmit: ${err}`);
-        })
-        .finally(() => {
-            formElement.reset()
-            formButton.textContent = "Сохранить"
-        });   
-};
-  
 const initModals = (settingsValid) => {
     const editProfilePopup = document.getElementById('popup_edit_profile');
     const editForm =  editProfilePopup.querySelector('form');
@@ -121,7 +149,7 @@ const initModals = (settingsValid) => {
         });
         toggleButtonState(settingsValid, inputList, buttonElement);
     };
-
+ 
     const initProfileButton = (formElement, settingsValid) => { 
         const inputList = Array.from(formElement.querySelectorAll(settingsValid.inputSelector));
         const buttonElement = formElement.querySelector(settingsValid.submitButtonSelector); 
@@ -136,12 +164,12 @@ const initModals = (settingsValid) => {
         editProfile(editForm, profileName, profileAbout);
         initProfileButton(editForm, settingsValid);
     });
-    
+
     addCardButton.addEventListener('click', function(){
         resetInputError(addForm, settingsValid);
         openPopup(addCardPopup);
     });
-    
+
     editAvatarButton.addEventListener('click', function() {
         resetInputError(avatarForm, settingsValid);
         openPopup(editAvatarPopup);
@@ -152,13 +180,12 @@ const initModals = (settingsValid) => {
     });
 
     addForm.addEventListener('submit', (evt) => {
-        const cardsContainer = document.querySelector('.places');
-        handleFormAddSubmit(evt, addForm, cardsContainer);
+        handleFormAddSubmit(evt, addForm);
     });
 
     avatarForm.addEventListener('submit', (evt) => {
         handleFormEditAvatarSubmit(evt, avatarForm);
     });
-};
+    };
 
 export {updateUserProfile, updateUserAvatar, initModals}

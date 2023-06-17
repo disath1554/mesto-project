@@ -1,24 +1,23 @@
 // utils
 
-const loadImage = (imageUrl, arg='avatar') => {
-    if (arg === 'avatar') {
-      return new Promise((resolve, reject) => {
-          const image = document.querySelector('.profile__image');
-          image.src = imageUrl;
-          image.onerror = reject;
-          image.onload = resolve;
-      });
-    }
+function loadImage(imageUrl) {
     return new Promise((resolve, reject) => {
-      const new_image = document.createElement('img');
-      new_image.src = imageUrl;
-      new_image.onerror = reject;
-      new_image.onload = resolve;
-    });
-}; 
+     const image = document.createElement('img');
+     image.src = imageUrl;
+     image.onerror = reject;
+     image.onload = resolve;
+   });
+}
+
+const resetForm = (popup) => {
+    const inputList = Array.from(popup.querySelectorAll(".form__input"));
+    inputList.forEach((inputElement) => {
+        inputElement.value ="";
+    }); 
+};
 
 const renderError = (err) => {
-    alert(err);
+    console.log(err);
 };
 
 const contentShow = () => {
@@ -39,6 +38,7 @@ const setEscEventListener = (evt) => {
    
 const closePopup = (popupItem) => {
     document.removeEventListener('keyup', setEscEventListener);
+    resetForm(popupItem);
     popupItem.classList.remove('popup_opened');
     popupItem.classList.add('popup_closed');
     
