@@ -1,7 +1,7 @@
 const token =  '75517d06-b879-461d-b656-080fd61e6a64';
 const serverUrl = 'https://nomoreparties.co/v1/plus-cohort-25'; 
 
-function getUserProfile() {
+export function getUserProfile() {
     return  fetch(`${serverUrl}/users/me`, {
     headers: {
       authorization: token
@@ -9,7 +9,7 @@ function getUserProfile() {
   });
 }
 
-function getCardsList() {
+export function getCardsList() {
     return fetch(`${serverUrl}/cards`, {
         headers: {
             authorization: token
@@ -17,7 +17,7 @@ function getCardsList() {
     });
 }
 
-function saveUserProfile(newName, newAbout) {
+export function saveUserProfile(newName, newAbout) {
     return fetch(`${serverUrl}/users/me`, {
         method: 'PATCH',
         headers: {
@@ -31,7 +31,7 @@ function saveUserProfile(newName, newAbout) {
     });
 }
 
-function saveUserAvatar(newImage) {
+export function saveUserAvatar(newImage) {
     return fetch(`${serverUrl}/users/me/avatar`, {
         method: 'PATCH',
         headers: {
@@ -43,7 +43,7 @@ function saveUserAvatar(newImage) {
     });
 }
 
-function createNewCard(newName, newLink) {
+export function createNewCard(newName, newLink) {
     return fetch(`${serverUrl}/cards`, {
         method: 'POST',
         headers: {
@@ -56,5 +56,11 @@ function createNewCard(newName, newLink) {
     });
 }
 
-
-export {getUserProfile, saveUserProfile, getCardsList, createNewCard, saveUserAvatar};
+export function deleteCard(id) {
+    return fetch(`${serverUrl}/cards/${id}`, {
+        method: 'DELETE',
+        headers: {
+            authorization: token
+        }
+    });
+}

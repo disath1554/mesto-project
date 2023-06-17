@@ -1,5 +1,5 @@
-import {getCardsList} from './api.js';
-import {openPopup, renderError} from './utils.js'
+import {getCardsList, deleteCard} from './api.js';
+import {openPopup, renderError} from './utils.js';
 
 const cardsContainer = document.querySelector('.places');
 const cardTemplate = document.querySelector('#card-template').content;
@@ -16,17 +16,36 @@ const viewImage = (name, url) => {
     openPopup(viewImagePopup);
 };
 
+const addLikeCard = (card, likeButton) => {
+    likeButton.classList.toggle('places__place-like_active');
+};
+
+const deleteImageCard = (id, listItem) => {
+    deleteCard(id)
+    .then((res) => {
+        if (res.ok) {
+            return res.json();
+        } return Promise.reject(res.status);
+        })
+    .then((res) =>{
+        listItem.remove();
+    })
+    .catch((err) => {
+        renderError(`Ошибка deleteCard: ${err}`);
+    });
+};
+
 export const createCard = (card, isMyCard) => {
+    const cardId = card._id;
     const cardItem = cardElement.cloneNode(true);
     cardItem.querySelector('.places__place-title-text').textContent = card.name;
     cardItem.querySelector('.places__place-image').style.backgroundImage = `url(${card.link})`;
     
     const deleteButton = cardItem.querySelector('.places__place-delete');
-    
     if (isMyCard) {
         deleteButton.addEventListener('click', function() {
             const listItem = deleteButton.closest('.places__place-card');
-            listItem.remove();
+            deleteImageCard(cardId, listItem);
           });
     } else {
         deleteButton.style.visibility = "hidden"; 
@@ -35,8 +54,9 @@ export const createCard = (card, isMyCard) => {
     const likeButton = cardItem.querySelector('.places__place-like');
     if (!isMyCard) {
     likeButton.addEventListener('click', function() {
-        likeButton.classList.toggle('places__place-like_active');
-    });
+        addLikeCard(cardId, likeButton);
+        });
+    }
     
     const count = card.likes.length;
     const likeCount = cardItem.querySelector('.places__place-like-count');

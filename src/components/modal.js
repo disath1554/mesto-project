@@ -30,8 +30,7 @@ const handleFormEditSubmit = (evt, formElement, profileName, profileAbout) => {
         })
         .finally(() => {
             formButton.textContent = "Сохранить";
-        });
-    
+        }); 
 };
 
 const handleFormAddSubmit = (evt, formElement, cardsContainer) => {
@@ -160,6 +159,6 @@ const initModals = (settingsValid) => {
     avatarForm.addEventListener('submit', (evt) => {
         handleFormEditAvatarSubmit(evt, avatarForm);
     });
-
 };
+
 export {updateUserProfile, updateUserAvatar, initModals}
