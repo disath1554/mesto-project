@@ -65,7 +65,7 @@ export const createCard = (card, isMyCard=true, isMeLike=false) => {
             deleteImageCard(cardId, listItem);
           });
     } else {
-        deleteButton.style.visibility = "hidden"; 
+        deleteButton.remove();
     }
     const count = card.likes.length;
     const likeCountItem = cardItem.querySelector('.places__place-like-count');
