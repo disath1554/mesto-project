@@ -18,28 +18,19 @@ const viewImage = (name, url) => {
 
 const likeItCard = (id, likeButton, likeCountItem) => {
     const isLike = likeButton.classList.contains("places__place-like_active");
-    likeButton.classList.toggle('places__place-like_active');
+    
     if (isLike) {
         deleteLikeCard(id)
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            } return Promise.reject(res.status);
-        })
         .then((res) =>{
             const likeCount = res.likes.length;
             likeCountItem.textContent = likeCount;
+            likeButton.classList.toggle('places__place-like_active');
         })
         .catch((err) => {
             renderError(`Ошибка deleteLikeCard: ${err}`);
         }); 
     } else {
         putLikeCard(id)
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            } return Promise.reject(res.status);
-        })
         .then((res) =>{
             const likeCount = res.likes.length;
             likeCountItem.textContent = likeCount;
@@ -52,12 +43,7 @@ const likeItCard = (id, likeButton, likeCountItem) => {
 
 const deleteImageCard = (id, listItem) => {
     deleteCard(id)
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        } return Promise.reject(res.status);
-        })
-    .then((res) =>{
+    .then(() =>{
         listItem.remove();
     })
     .catch((err) => {
@@ -104,11 +90,6 @@ export const createCard = (card, isMyCard=true, isMeLike=false) => {
 
 function initCardsList(userId) {
     getCardsList()
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        } return Promise.reject(res.status);
-        })
     .then((res) =>{
         loadCards(res, userId);
     })

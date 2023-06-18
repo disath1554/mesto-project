@@ -22,21 +22,15 @@ const handleFormEditSubmit = (evt, formElement) => {
     const formButton = formElement.querySelector('.form__button');
     formButton.textContent = "Сохранение...";
     saveUserProfile(`${formElement.username.value}`, `${formElement.aboutself.value}`)
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            } return Promise.reject(res.status);
-            })
         .then((res) =>{
             updateUserProfile(res.name, res.about);
+            closePopup(formElement.closest('.popup'));
         })
         .catch((err) => {
             renderError(`Ошибка FormEditSubmit: ${err}`);
         })
         .finally(() => {
-            formElement.reset()
             formButton.textContent = "Сохранить";
-            closePopup(formElement.closest('.popup'));
         }); 
 };
 
@@ -55,13 +49,8 @@ const updateUserAvatar = (link) => {
     })
 };
 
-const updateAvatarOnServer = (formElement, link) => {
+const updateAvatarOnServer = (link) => {
     saveUserAvatar(link)
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            } return Promise.reject(res.status);
-            })
         .then((res) =>{
             updateAvatarOnPage(res.avatar);
         })
@@ -77,14 +66,13 @@ const handleFormEditAvatarSubmit = (evt, formElement) => {
     formButton.textContent = "Сохранение...";
     loadImage(newImage)
     .then(() => {
-        updateAvatarOnServer(formElement, newImage);
+        updateAvatarOnServer(newImage);
+        closePopup(formElement.closest('.popup'));
       })
     .catch((err) => {
         renderError(`Ошибка загрузки изображения: ${err}`);
     }).finally(() => {
-        formElement.reset()
         formButton.textContent = "Сохранить"
-        closePopup(formElement.closest('.popup'));
     });  
 };
 
@@ -95,11 +83,6 @@ const updateCardOnPage = (card) => {
 
 const updateCardOnServer = (newCardname, newCardlink) => {
     createNewCard(newCardname, newCardlink)
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        } return Promise.reject(res.status);
-        })
     .then((res) =>{
         updateCardOnPage(res);
     })
@@ -117,14 +100,13 @@ const handleFormAddSubmit = (evt, formElement) => {
     loadImage(newCardlink)
     .then(() => {
         updateCardOnServer(newCardname, newCardlink);
+        closePopup(formElement.closest('.popup'));
       })
     .catch((err) => {
         renderError(`Ошибка get img: ${err}`);
     })
     .finally(() => {
-        formButton.textContent = "Сохранить";
-        formElement.reset()
-        closePopup(formElement.closest('.popup'));
+        formButton.textContent = "Сохранить";        
     });
 };
 

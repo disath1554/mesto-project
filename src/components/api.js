@@ -1,85 +1,91 @@
 const token =  '75517d06-b879-461d-b656-080fd61e6a64';
-const serverUrl = 'https://nomoreparties.co/v1/plus-cohort-25'; 
+const serverUrl = 'https://nomoreparties.co/v1/plus-cohort-25';
 
-export function getUserProfile() {
-    return  fetch(`${serverUrl}/users/me`, {
+
+const config = {
+    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
     headers: {
-      authorization: token
+      authorization: '75517d06-b879-461d-b656-080fd61e6a64',
+      'Content-Type': 'application/json'
     }
-  });
 }
 
+function _getResponse(res) {
+    if (!res.ok) {
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }
+    return res.json();
+  }
+
+export function getUserProfile() {
+    return fetch(`${config.baseUrl}/users/me`, {
+      headers: config.headers
+    })
+      .then(res => _getResponse(res));
+}  
+
 export function getCardsList() {
-    return fetch(`${serverUrl}/cards`, {
-        headers: {
-            authorization: token
-          }
-    });
+    return fetch(`${config.baseUrl}/cards`, {
+        headers: config.headers
+      })
+        .then(res => _getResponse(res));
 }
 
 export function saveUserProfile(newName, newAbout) {
-    return fetch(`${serverUrl}/users/me`, {
+    return fetch(`${config.baseUrl}/users/me`, {
         method: 'PATCH',
-        headers: {
-            authorization: token,
-            'Content-Type': 'application/json'
-          },
+        headers: config.headers,
         body: JSON.stringify({
-            name: newName,
-            about: newAbout
+          name: newName,
+          about: newAbout
         })
-    });
+      })
+        .then(res => _getResponse(res));
 }
 
 export function saveUserAvatar(newImage) {
-    return fetch(`${serverUrl}/users/me/avatar`, {
+    return fetch(`${config.baseUrl}/users/me/avatar`, {
         method: 'PATCH',
-        headers: {
-            authorization: token, 'Content-Type': 'application/json'
-          },
+        headers: config.headers,
         body: JSON.stringify({
-            avatar: newImage
+          avatar: newImage
         })
-    });
+      })
+        .then(res => _getResponse(res));
 }
 
 export function createNewCard(newName, newLink) {
-    return fetch(`${serverUrl}/cards`, {
+    return fetch(`${config.baseUrl}/cards`, {
         method: 'POST',
-        headers: {
-            authorization: token,'Content-Type': 'application/json'
-          },
+        headers: config.headers,
         body: JSON.stringify({
-            name: newName,
-            link: newLink
+          name: newName,
+          link: newLink
         })
-    });
+      })
+        .then(res => _getResponse(res));
 }
 
 export function deleteCard(id) {
-    return fetch(`${serverUrl}/cards/${id}`, {
+    return fetch(`${config.baseUrl}/cards/${id}`, {
         method: 'DELETE',
-        headers: {
-            authorization: token
-        }
-    });
+        headers: config.headers
+      })
 }
 
 export function putLikeCard(id) {
-    return fetch(`${serverUrl}/cards/likes/${id}`, {
+    return fetch(`${config.baseUrl}/cards/likes/${id}`, {
         method: 'PUT',
-        headers: {
-            authorization: token
-        }
-    });
+        headers: config.headers
+      })
+        .then(res => _getResponse(res));
 }
 
 export function deleteLikeCard(id) {
-    return fetch(`${serverUrl}/cards/likes/${id}`, {
+    return fetch(`${config.baseUrl}/cards/likes/${id}`, {
         method: 'DELETE',
-        headers: {
-            authorization: token
-        }
-    });
-}
+        headers: config.headers
+      })
+        .then(res => _getResponse(res));
+}    
 

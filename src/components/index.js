@@ -19,12 +19,6 @@ window.onload =
         };
         getUserProfile()
         .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(res.status);
-        })
-        .then((res) => {
             updateUserProfile(res.name, res.about);
             updateUserAvatar(res.avatar);
             initCardsList(res._id);
