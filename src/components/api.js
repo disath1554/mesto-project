@@ -1,7 +1,3 @@
-const token =  '75517d06-b879-461d-b656-080fd61e6a64';
-const serverUrl = 'https://nomoreparties.co/v1/plus-cohort-25';
-
-
 const config = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-25',
     headers: {
