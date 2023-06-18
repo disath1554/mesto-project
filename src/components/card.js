@@ -34,6 +34,7 @@ const likeItCard = (id, likeButton, likeCountItem) => {
         .then((res) =>{
             const likeCount = res.likes.length;
             likeCountItem.textContent = likeCount;
+            likeButton.classList.toggle('places__place-like_active');
         })
         .catch((err) => {
             renderError(`Ошибка addLikeCard: ${err}`);
@@ -74,11 +75,10 @@ export const createCard = (card, isMyCard=true, isMeLike=false) => {
     if (isMeLike) {
         likeButton.classList.add('places__place-like_active');
     } 
-    if (!isMyCard) {
+    
     likeButton.addEventListener('click', function() {
-        likeItCard(cardId, likeButton, likeCountItem);
-        });
-    }
+    likeItCard(cardId, likeButton, likeCountItem);
+    }); //if (!isMyCard), ecли нельзя лайкать свои карточки
     
     const imageContainer = cardItem.querySelector('.places__place-image');
     imageContainer.addEventListener('click', function() {
